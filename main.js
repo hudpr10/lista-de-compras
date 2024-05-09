@@ -32,10 +32,12 @@ function enviandoItem() {
                 checked: false
             })
 
+            
             legenda.innerHTML = ''
             campoItem.value = ''
             campoQuantidade.value = 1
             localStorage.setItem('lista', JSON.stringify(listaItens))
+            campoItem.focus()
         }
     }
 }
