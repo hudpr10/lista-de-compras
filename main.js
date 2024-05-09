@@ -1,32 +1,44 @@
 const listaContainer = document.querySelector('.lista')
+const legenda = document.querySelector('.legenda')
+const botao = document.querySelector('.botao-adicionar')
 const listaItens = localStorage.getItem('lista') ? JSON.parse(localStorage.getItem('lista')) : []
 
 const campos = document.querySelectorAll('.topo__campo-texto-input')
 const campoItem = campos[0]
 const campoQuantidade = campos[1]
 
-
 campos.forEach(cadaInput => {
     cadaInput.addEventListener('keydown', (e) => {
-        if(e.code == 'Enter') {
-            if(campoItem.value == '' || campoQuantidade.value == '') {
-                console.log('Adicione o item desejado e sua quantidade!')
-            } else {
-                adicionarItemNaLista(campoItem.value, campoQuantidade.value)
-
-                listaItens.push({
-                    item: campoItem.value,
-                    quantidade: parseInt(campoQuantidade.value),
-                    checked: false
-                })
-
-                campoItem.value = ''
-                campoQuantidade.value = 1
-                localStorage.setItem('lista', JSON.stringify(listaItens))
-            }
+        if(e.code === 'Enter' || e.code === 'NumpadEnter') {
+            enviandoItem();
         }
     })
 });
+
+botao.addEventListener('click', enviandoItem)
+
+function enviandoItem() {
+    if(campoQuantidade.value <= 0) {
+        legenda.innerHTML = `A quantidade precisa ser maior que 0!!!`
+    } else {
+        if(campoItem.value == '' || campoQuantidade.value == '') {
+            legenda.innerHTML = 'Adicione o item desejado e sua quantidade!!!'
+        } else {
+            adicionarItemNaLista(campoItem.value, campoQuantidade.value)
+
+            listaItens.push({
+                item: campoItem.value,
+                quantidade: parseInt(campoQuantidade.value),
+                checked: false
+            })
+
+            legenda.innerHTML = ''
+            campoItem.value = ''
+            campoQuantidade.value = 1
+            localStorage.setItem('lista', JSON.stringify(listaItens))
+        }
+    }
+}
 
 listaItens.forEach(cadaItem => {
     adicionarItemNaLista(cadaItem.item, cadaItem.quantidade, cadaItem.checked)

@@ -2,9 +2,10 @@
 
 :root {
     --cor-texto: #F5F5F5;
-    --cor-fundo: #363062;
-    --cor-fundo-claro: #4D4C7D;
+    --cor-fundo: #272727;
+    --cor-fundo-claro: #3C5B6F;
     --cor-destaque: #F99417;
+    --vermelho: #FF7676;
 }
 
 * {
@@ -48,19 +49,40 @@ body {
     color: var(--cor-texto);
     border: 1px solid var(--cor-fundo);
     transition: 200ms;
-    width: 40%;
+}
+
+.botao-adicionar {
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    background-color: var(--cor-fundo-claro);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-fundo);
+    transition: 200ms;
+}
+
+.icone {
+    width: 24px;
+    height: 24px;
 }
 
 .campo-quantidade {
     width: 10%;
 }
 
-.topo__campo-texto-input:hover, .topo__campo-texto-input:focus {
+.topo__campo-texto-input:hover, .topo__campo-texto-input:focus, 
+.botao-adicionar:hover {
     border: 1px solid var(--cor-destaque);
 }
 
 .topo__campo-texto-input::placeholder {
     color: var(--cor-fundo);
+}
+
+.legenda {
+    color: var(--vermelho);
+    text-align: center;
 }
 
 /* Itens da lista */
@@ -150,9 +172,13 @@ body {
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 370px) {
     .lista-item {
-        width: 80%;
+        width: 85%;
+    }
+
+    .campo-item {
+        width: 200px;
     }
 
     .topo-titulo {
